@@ -1,0 +1,6 @@
+*
+!env/
+!env/**
+!env.json
+!.gitattributes
+!.gitignore

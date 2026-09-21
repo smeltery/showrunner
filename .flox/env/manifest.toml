@@ -1,0 +1,31 @@
+schema-version = "1.13.0"
+
+[install]
+bun.pkg-path = "bun"
+nodejs.pkg-path = "nodejs_22"
+pnpm.pkg-path = "pnpm"
+python3.pkg-path = "python3"
+pre-commit.pkg-path = "pre-commit"
+shellcheck.pkg-path = "shellcheck"
+actionlint.pkg-path = "actionlint"
+git.pkg-path = "git"
+gh.pkg-path = "gh"
+jq.pkg-path = "jq"
+curl.pkg-path = "curl"
+bash.pkg-path = "bash"
+
+[hook]
+on-activate = '''
+  if [[ "$(pnpm --version 2>/dev/null || true)" != "10.13.1" ]]; then
+    export COREPACK_HOME="${COREPACK_HOME:-$PWD/.corepack}"
+    corepack enable
+    corepack prepare pnpm@10.13.1 --activate
+  fi
+  if [[ -z "${CI:-}" && -d .git ]]; then
+    pre-commit install
+  fi
+  echo "showrunner: node $(node --version), pnpm $(pnpm --version), bun $(bun --version)"
+'''
+
+[options]
+systems = ["aarch64-darwin", "x86_64-darwin", "aarch64-linux", "x86_64-linux"]
