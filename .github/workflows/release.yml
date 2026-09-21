@@ -16,6 +16,7 @@ concurrency:
 
 permissions:
   contents: write
+  packages: write
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
@@ -72,6 +73,11 @@ jobs:
       - name: Pack the library
         run: flox activate -- bash scripts/pack-release.sh
 
+      - name: Publish to GitHub Packages
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
+        run: flox activate -- bash scripts/publish-package.sh
+
       - name: Publish to release
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
@@ -84,6 +90,9 @@ jobs:
   verify-assets:
     name: verify release assets
     needs: publish
+    permissions:
+      contents: read
+      packages: read
     runs-on: blacksmith-2vcpu-ubuntu-2404
     timeout-minutes: 10
     steps:
@@ -101,4 +110,7 @@ jobs:
       - name: Confirm expected assets
         env:
           GH_TOKEN: ${{ github.token }}
-        run: flox activate -- bash scripts/verify-release-assets.sh
+          NODE_AUTH_TOKEN: ${{ github.token }}
+        run: |
+          flox activate -- bash scripts/verify-release-assets.sh
+          flox activate -- bash scripts/verify-package.sh

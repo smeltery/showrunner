@@ -1,12 +1,11 @@
 {
 	"name": "@smeltery/showrunner",
 	"version": "0.1.0",
-	"private": true,
 	"description": "Make your pull request worth watching. Website-agnostic Playwright demos.",
 	"license": "LicenseRef-PolyForm-Shield-1.0.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/smeltery/showrunner.git"
+		"url": "git+https://github.com/smeltery/showrunner.git"
 	},
 	"files": [
 		"dist",
@@ -20,6 +19,9 @@
 			"types": "./dist/index.d.ts",
 			"import": "./dist/index.js"
 		}
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com"
 	},
 	"scripts": {
 		"build": "tsc -p tsconfig.build.json",

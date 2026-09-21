@@ -9,6 +9,7 @@ flowchart TD
   tag --> release["release.yml"]
   release --> gates["Same Flox checks as CI"]
   gates --> pack["pnpm pack"]
+  pack --> registry["GitHub Packages"]
   pack --> github["GitHub Release tarball and checksum"]
 ```
 
@@ -18,9 +19,9 @@ flowchart TD
 2. Wait for `ci` to pass.
 3. `auto-release.yml` does nothing when that commit already has a `vMAJOR.MINOR.PATCH` tag.
 4. Otherwise it increments the latest patch tag, starting at `v0.1.0` when no release tag exists, pushes the tag, and runs `release.yml` with that tag.
-5. [`.github/workflows/release.yml`](../.github/workflows/release.yml) checks that the tag points at `origin/main`, runs the Flox checks, sets the packed package version from the tag, and uploads `showrunner-<version>.tgz` plus `SHA256SUMS`.
+5. [`.github/workflows/release.yml`](../.github/workflows/release.yml) checks that the tag points at `origin/main`, runs the Flox checks, sets the packed package version from the tag, publishes `@smeltery/showrunner` to GitHub Packages, and uploads `showrunner-<version>.tgz` plus `SHA256SUMS`.
 
-`package.json` in Git stays the baseline. The tarball version comes from the tag at pack time. The package remains private and is not published to npm.
+`package.json` in Git stays the baseline. The published version comes from the tag. The package is private on GitHub Packages and is not published to the public npm registry. A version that is already on the registry is left as-is.
 
 A tag you push yourself also starts `release.yml`. A tag pushed by `GITHUB_TOKEN` does not, which is why auto-release dispatches the workflow after it pushes.
 

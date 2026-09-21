@@ -23,12 +23,12 @@ flowchart TD
 
 ## Jobs
 
-| Job            | Runner                         | Checks                                                                |
-| -------------- | ------------------------------ | --------------------------------------------------------------------- |
-| `docs`         | `blacksmith-2vcpu-ubuntu-2404` | Markdown, Mermaid, links, budgets, shellcheck, actionlint, whitespace |
-| `node`         | `blacksmith-4vcpu-ubuntu-2404` | Format, types, build, verification tests, bundled demo                |
-| `auto-release` | `blacksmith-2vcpu-ubuntu-2404` | After a green `ci` run on `main`, cut the next patch tag              |
-| `release`      | Blacksmith                     | Re-run the gates, pack the tarball, publish, verify assets            |
+| Job            | Runner                         | Checks                                                                        |
+| -------------- | ------------------------------ | ----------------------------------------------------------------------------- |
+| `docs`         | `blacksmith-2vcpu-ubuntu-2404` | Markdown, Mermaid, links, budgets, shellcheck, actionlint, whitespace         |
+| `node`         | `blacksmith-4vcpu-ubuntu-2404` | Format, types, build, verification tests, bundled demo                        |
+| `auto-release` | `blacksmith-2vcpu-ubuntu-2404` | After a green `ci` run on `main`, cut the next patch tag                      |
+| `release`      | Blacksmith                     | Re-run the gates, pack the tarball, publish to GitHub Packages, verify assets |
 
 Both CI jobs start with `step-security/harden-runner` in audit mode, check out the repository, install Flox, and run `flox activate`. Third-party actions are pinned to a commit SHA. Concurrency cancels an older run for the same ref. `ci` has read-only contents permission.
 

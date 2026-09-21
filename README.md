@@ -8,13 +8,13 @@
 [![pnpm](https://img.shields.io/badge/pnpm-10.13-f69220.svg)](package.json)
 [![Bun](https://img.shields.io/badge/bun-docs%20checks-black.svg)](tools/docs/package.json)
 [![Flox](https://img.shields.io/badge/dev%20env-flox-7c3aed.svg)](https://flox.dev/)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](.pre-commit-config.yaml)
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-%40smeltery%2Fshowrunner-blue)](https://github.com/smeltery/showrunner/pkgs/npm/showrunner)
 
 **Make your pull request worth watching.**
 
 Showrunner is a website-agnostic Playwright library for replayable pull request demos. A scenario keeps the visible cursor, paced typing, captions, and chapter cards. The application under test keeps authentication, URLs, data setup, and page objects. Playwright records the video.
 
-The package stays private and is not published to npm. Install it from a local build or from the GitHub Release tarball.
+`@smeltery/showrunner` is a private package on GitHub Packages. It is not on the public npm registry. Install it with a GitHub token that can read packages from `smeltery/showrunner`, or from a local build.
 
 ## Quick start
 
