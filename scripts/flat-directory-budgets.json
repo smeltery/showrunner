@@ -1,0 +1,9 @@
+{
+	"default_files": 25,
+	"directories": {
+		".": {
+			"limit": 30,
+			"reason": "Root holds package manifests, configs, and entry docs."
+		}
+	}
+}

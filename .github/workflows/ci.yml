@@ -1,0 +1,62 @@
+name: ci
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  docs:
+    name: docs
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    timeout-minutes: 15
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          persist-credentials: false
+
+      - uses: flox/install-flox-action@1128abd73431089ab9d871c893b4e72a729354e1 # v2
+
+      - name: Markdown, Mermaid, and doc links
+        run: flox activate -- bash scripts/check-docs.sh
+
+      - name: Budgets, shellcheck, and actionlint
+        run: flox activate -- bash scripts/check-hygiene.sh
+
+      - name: Whitespace and yaml
+        run: flox activate -- bash scripts/check-whitespace.sh
+
+  node:
+    name: node
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 20
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          persist-credentials: false
+
+      - uses: flox/install-flox-action@1128abd73431089ab9d871c893b4e72a729354e1 # v2
+
+      - name: Format, types, build, and tests
+        run: flox activate -- bash scripts/check-node.sh

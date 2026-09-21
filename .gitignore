@@ -1,7 +1,9 @@
 node_modules/
 dist/
+dist-release/
 test-results/
 playwright-report/
+.corepack/
 .env
 .env.*
 playwright/.auth/

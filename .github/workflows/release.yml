@@ -1,0 +1,104 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to build, for example v0.1.0
+        required: true
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
+
+jobs:
+  preflight:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 30
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          fetch-depth: 0
+          ref: ${{ env.RELEASE_TAG }}
+
+      - uses: flox/install-flox-action@1128abd73431089ab9d871c893b4e72a729354e1 # v2
+
+      - name: Validate release tag
+        run: flox activate -- bash scripts/validate-release-tag.sh
+
+      - name: Markdown, Mermaid, and doc links
+        run: flox activate -- bash scripts/check-docs.sh
+
+      - name: Budgets, shellcheck, and actionlint
+        run: flox activate -- bash scripts/check-hygiene.sh
+
+      - name: Whitespace and yaml
+        run: flox activate -- bash scripts/check-whitespace.sh
+
+      - name: Format, types, build, and tests
+        run: flox activate -- bash scripts/check-node.sh
+
+  publish:
+    needs: preflight
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    timeout-minutes: 20
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          ref: ${{ env.RELEASE_TAG }}
+
+      - uses: flox/install-flox-action@1128abd73431089ab9d871c893b4e72a729354e1 # v2
+
+      - name: Pack the library
+        run: flox activate -- bash scripts/pack-release.sh
+
+      - name: Publish to release
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          generate_release_notes: true
+          files: |
+            dist-release/showrunner-*.tgz
+            dist-release/SHA256SUMS
+
+  verify-assets:
+    name: verify release assets
+    needs: publish
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    timeout-minutes: 10
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          ref: ${{ env.RELEASE_TAG }}
+
+      - uses: flox/install-flox-action@1128abd73431089ab9d871c893b4e72a729354e1 # v2
+
+      - name: Confirm expected assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: flox activate -- bash scripts/verify-release-assets.sh

@@ -1,0 +1,30 @@
+repos:
+  - repo: local
+    hooks:
+      - id: docs
+        name: markdown and mermaid
+        entry: flox activate -- bash scripts/check-docs.sh
+        language: system
+        pass_filenames: false
+      - id: hygiene
+        name: budgets, shellcheck, and actionlint
+        entry: flox activate -- bash scripts/check-hygiene.sh
+        language: system
+        pass_filenames: false
+      - id: node
+        name: typecheck, format, build, and tests
+        entry: flox activate -- bash scripts/check-node.sh
+        language: system
+        pass_filenames: false
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-yaml
+        args: ["--unsafe"]
+      - id: check-json
+      - id: check-added-large-files
+        args: ["--maxkb=20480"]
