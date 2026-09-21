@@ -12,6 +12,14 @@ flowchart LR
 
 ## Install
 
+From GitHub Packages:
+
+```sh
+npm config set @smeltery:registry https://npm.pkg.github.com
+npm config set //npm.pkg.github.com/:_authToken "$(gh auth token)"
+pnpm add -D @smeltery/showrunner
+```
+
 From a local checkout:
 
 ```sh
