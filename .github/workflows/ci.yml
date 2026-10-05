@@ -31,7 +31,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: flox/install-flox-action@1128abd73431089ab9d871c893b4e72a729354e1 # v2
+      - uses: flox/install-flox-action@5bb9eaaffbeaa699a8251a1ae21ecf4c8e0e37d4 # v2
 
       - name: Markdown, Mermaid, and doc links
         run: flox activate -- bash scripts/check-docs.sh
@@ -56,7 +56,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: flox/install-flox-action@1128abd73431089ab9d871c893b4e72a729354e1 # v2
+      - uses: flox/install-flox-action@5bb9eaaffbeaa699a8251a1ae21ecf4c8e0e37d4 # v2
 
       - name: Format, types, build, and tests
         run: flox activate -- bash scripts/check-node.sh
