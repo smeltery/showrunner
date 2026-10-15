@@ -4,8 +4,8 @@ import { execFileSync } from "node:child_process";
 const assetDirectory = new URL("../../site/public/assets/", import.meta.url);
 const embedded = async (name) =>
 	"data:image/svg+xml;base64," + (await readFile(new URL(name, assetDirectory))).toString("base64");
-const [mark, github, playwright] = await Promise.all(
-	["mark.svg", "github.svg", "playwright.svg"].map(embedded),
+const [mark, github, playwright, smeltery] = await Promise.all(
+	["mark.svg", "github.svg", "playwright.svg", "smeltery.svg"].map(embedded),
 );
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
 <defs>
@@ -24,7 +24,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
 <text x="65" y="419" font-family="Arial, sans-serif" font-size="23" fill="#66665c">Let your agent write, verify, and record the walkthrough.</text>
 <path d="M64 486H1136" stroke="#d9d6cc"/>
 <text x="65" y="541" font-family="Arial, sans-serif" font-size="12" letter-spacing="1.8" fill="#66665c">REPLAYABLE DEMOS. VERIFIED OUTCOMES.</text>
-<text x="65" y="571" font-family="Arial, sans-serif" font-size="14" fill="#66665c">Made by Smeltery</text>
+<image href="${smeltery}" x="65" y="551" width="28" height="29"/>
+<text x="103" y="571" font-family="Arial, sans-serif" font-size="14" fill="#66665c">Made by Smeltery</text>
 <image href="${playwright}" x="833" y="527" width="37" height="37"/>
 <text x="880" y="551" font-family="Arial, sans-serif" font-size="17" fill="#24241f">Playwright</text>
 <path d="M991 529V563" stroke="#d9d6cc"/>
