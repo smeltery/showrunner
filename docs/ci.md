@@ -23,12 +23,12 @@ flowchart TD
 
 ## Jobs
 
-| Job            | Runner                         | Checks                                                                        |
-| -------------- | ------------------------------ | ----------------------------------------------------------------------------- |
+| Job            | Runner         | Checks                                                                        |
+| -------------- | -------------- | ----------------------------------------------------------------------------- |
 | `docs`         | `ubuntu-24.04` | Markdown, Mermaid, links, budgets, shellcheck, actionlint, whitespace         |
 | `node`         | `ubuntu-24.04` | Format, types, build, verification tests, bundled demo                        |
 | `auto-release` | `ubuntu-24.04` | After a green `ci` run on `main`, cut the next patch tag                      |
-| `release`      | GitHub-hosted                     | Re-run the gates, pack the tarball, publish to GitHub Packages, verify assets |
+| `release`      | GitHub-hosted  | Re-run the gates, pack the tarball, publish to GitHub Packages, verify assets |
 
 Both CI jobs start with `step-security/harden-runner` in audit mode, check out the repository, install Flox, and run `flox activate`. Third-party actions are pinned to a commit SHA. Concurrency cancels an older run for the same ref. `ci` has read-only contents permission.
 

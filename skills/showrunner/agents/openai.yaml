@@ -1,0 +1,4 @@
+interface:
+  display_name: "Showrunner"
+  short_description: "Turn application changes into verified browser demos"
+  default_prompt: "Use $showrunner to demo this change, verify the outcome, and record a replayable walkthrough."

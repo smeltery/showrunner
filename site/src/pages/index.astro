@@ -1,0 +1,168 @@
+---
+import Base from "../layouts/Base.astro";
+---
+<Base title="Showrunner — Make your pull request worth watching" description="Ask your agent to turn an application change into a verified, replayable Playwright demo with Showrunner." active="home"><main id="main">
+			<section class="wrap hero">
+				<p class="eyebrow">
+					<span class="signal" aria-hidden="true"></span> THE CHANGE IS THE STORY
+				</p>
+				<h1>Make your pull request<br /><em>worth watching.</em></h1>
+				<p class="intro">
+					Ask your agent to demo the change.<br class="desktop-break" />
+					It writes the scenario, checks the outcome, and records the story.
+				</p>
+				<div class="actions">
+					<a class="button primary" href="/docs/getting-started/">Get the agent skill</a
+					><a class="text-link" href="#demo">See the sequence</a>
+				</div>
+				<p class="hero-note">
+					<img class="brand-icon" src="/assets/playwright.svg" alt="" width="20" height="20" />An
+					agent skill. A Playwright library. A repeatable first take.
+				</p>
+			</section>
+			<section class="wrap demo-section" id="demo" aria-labelledby="demo-title">
+				<div class="section-label">
+					<h2 id="demo-title">A small change. A clear story.</h2>
+					<span>INTERACTIVE ILLUSTRATION / 4 STEPS</span>
+				</div>
+				<div class="stage">
+					<div class="stage-top">
+						<span><span class="record-dot" aria-hidden="true"></span> FIRST TAKE</span
+						><span>release-checklist.demo.ts</span
+						><span class="stage-format">PLAYWRIGHT + SHOWRUNNER</span>
+					</div>
+					<div class="scene">
+						<div class="scene-context">
+							<span class="eyebrow">THE SCENE</span>
+							<p>A release checklist.<br />One task to ship.</p>
+							<span class="take-label">TAKE 001</span>
+						</div>
+						<div class="app-window">
+							<div class="window-bar">
+								<span aria-hidden="true">● ● ●</span><span>your-app / release</span>
+							</div>
+							<div class="app-content">
+								<p class="app-label">WORKSPACE / RELEASE</p>
+								<h3>Ready for the next release.</h3>
+								<p>Good work deserves a good handoff.</p>
+								<div class="mock-field">
+									<span>Task</span>
+									<div>
+										<span id="demo-input">Draft task</span
+										><span class="mock-add">Add task <span aria-hidden="true">+</span></span>
+									</div>
+								</div>
+								<div class="checklist-item" id="demo-result">
+									<span class="empty-mark" aria-hidden="true">○</span> Your next task starts here.
+								</div>
+							</div>
+						</div>
+						<div class="caption" id="demo-caption">01 / Set the scene with a chapter card.</div>
+					</div>
+					<div class="stage-bottom">
+						<div class="sequence" aria-label="Demo sequence">
+							<span class="active" data-step="0">01 <span>Set the scene</span></span
+							><span data-step="1">02 <span>Type</span></span
+							><span data-step="2">03 <span>Act</span></span
+							><span data-step="3">04 <span>Assert</span></span>
+						</div>
+						<button class="next-step" id="demo-next" hidden>
+							Next step <span aria-hidden="true">→</span>
+						</button>
+					</div>
+				</div>
+				<p class="demo-footnote">
+					An illustration of the workflow, not a recorded run.
+					<a href="/docs/getting-started/#first">Run the real, self-contained demo</a>
+				</p>
+				<p class="sr-only" id="demo-status" role="status"></p>
+			</section>
+			<section class="wrap workflow" id="workflow" aria-labelledby="workflow-title">
+				<div class="section-intro">
+					<p class="eyebrow">LESS “HERE’S WHAT I CHANGED.”</p>
+					<h2 id="workflow-title">More “here’s<br />how it works.”</h2>
+					<p>A diff explains the implementation. A demo shows what the change feels like to use.</p>
+				</div>
+				<div class="steps">
+					<article>
+						<span class="step-number">01</span>
+						<div>
+							<h3>Point your agent at the change.</h3>
+							<p>
+								The skill guides your agent through the diff and your app’s existing routes,
+								authentication, fixtures, and data.
+							</p>
+						</div>
+					</article>
+					<article>
+						<span class="step-number">02</span>
+						<div>
+							<h3>Let it write and verify the story.</h3>
+							<p>
+								Your agent writes a Playwright scenario with meaningful assertions, then runs it
+								without presentation delays to check the outcome.
+							</p>
+						</div>
+					</article>
+					<article>
+						<span class="step-number">03</span>
+						<div>
+							<h3>Get a recording you can replay.</h3>
+							<p>
+								The agent records with readable pacing and reports the video, trace, and any
+								limitations. The scenario stays with your app for the next change.
+							</p>
+						</div>
+					</article>
+				</div>
+			</section>
+			<section class="code-section" id="example">
+				<div class="wrap code-layout">
+					<div>
+						<p class="eyebrow">STANDARD LOCATORS. BETTER PRESENTATION.</p>
+						<h2>A little direction.<br />Still your test.</h2>
+						<p>
+							Presentation delays set the pace. Playwright’s actionability checks and your
+							assertions establish that the app is ready.
+						</p>
+						<a
+							class="light-link"
+							href="/docs/api/"
+							>Explore the presentation API</a
+						>
+						<p class="code-note">
+							Set <code>pace: 0</code> for verification.<br />Keep the pacing for the recording.
+						</p>
+					</div>
+					<div class="code-window">
+						<div class="code-title"><span>profile.demo.ts</span><span>TYPESCRIPT</span></div>
+						<pre is:raw
+							tabindex="0"
+							aria-label="Example Showrunner scenario"
+						><code><span class="code-purple">import</span> { test, expect } <span class="code-purple">from</span> <span class="code-green">"@smeltery/showrunner"</span>;
+
+test(<span class="code-green">"save a display name"</span>, <span class="code-purple">async</span> ({ page, demo }) =&gt; {
+  <span class="code-purple">await</span> page.goto(<span class="code-green">"/settings/profile"</span>);
+  <span class="code-purple">await</span> demo.caption(<span class="code-green">"Make it yours."</span>);
+  <span class="code-purple">await</span> demo.fill(
+    page.getByRole(<span class="code-green">"textbox"</span>, { name: <span class="code-green">"Display name"</span> }),
+    <span class="code-green">"River"</span>
+  );
+  <span class="code-purple">await</span> demo.click(page.getByRole(<span class="code-green">"button"</span>, { name: <span class="code-green">"Save"</span> }));
+  <span class="code-purple">await</span> expect(page.getByRole(<span class="code-green">"status"</span>))
+    .toHaveText(<span class="code-green">"Profile saved"</span>);
+});</code></pre>
+						<p>Adapt the route and accessible names to your application.</p>
+					</div>
+				</div>
+			</section>
+			<section class="wrap closing">
+				<p class="eyebrow">YOUR NEXT PR HAS A STORY.</p>
+				<h2>Give it a good first take.</h2>
+				<p>
+					Give your agent the skill and a change to demonstrate. Keep the scenario with your code.
+				</p>
+				<a class="button primary" href="/docs/getting-started/">Set up the agent skill</a>
+				<p class="availability">Private package on GitHub Packages · Local builds supported</p>
+			</section>
+		</main></Base>

@@ -8,8 +8,10 @@
 		"url": "git+https://github.com/smeltery/showrunner.git"
 	},
 	"files": [
-		"dist",
+		"dist/*.js",
+		"dist/*.d.ts",
 		"docs",
+		"skills",
 		"LICENSE",
 		"README.md"
 	],
@@ -26,7 +28,7 @@
 	"scripts": {
 		"build": "tsc -p tsconfig.build.json",
 		"prepack": "pnpm build",
-		"type-check": "tsc --noEmit",
+		"type-check": "tsc --noEmit && pnpm --dir site type-check",
 		"demo": "playwright test --project=demo",
 		"test:agent": "playwright test --project=verification --reporter=line",
 		"fmt": "oxfmt .",
@@ -34,7 +36,10 @@
 		"check:docs": "bash scripts/check-docs.sh",
 		"check:hygiene": "bash scripts/check-hygiene.sh",
 		"check:node": "bash scripts/check-node.sh",
-		"check:whitespace": "bash scripts/check-whitespace.sh"
+		"check:whitespace": "bash scripts/check-whitespace.sh",
+		"site:build": "node scripts/site/build.mjs",
+		"site:preview": "node scripts/site/serve.mjs",
+		"site:dev": "pnpm --dir site dev"
 	},
 	"devDependencies": {
 		"@playwright/test": "1.63.0",

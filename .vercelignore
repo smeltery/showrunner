@@ -1,0 +1,15 @@
+.git
+.flox
+.website-studio
+.vercel
+node_modules
+site/node_modules
+site/.astro
+dist
+dist-release
+test-results
+playwright-report
+.env
+.env.*
+*.webm
+*.mp4

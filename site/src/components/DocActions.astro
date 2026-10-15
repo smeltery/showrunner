@@ -1,0 +1,24 @@
+---
+interface Props { source: string; markdown?: string; }
+const { source, markdown } = Astro.props;
+const providers = [
+ ["ChatGPT", "chatgpt", "https://chatgpt.com/?prompt="],
+ ["Claude", "claude", "https://claude.ai/new?q="],
+ ["v0", "v0", "https://v0.app/?q="],
+ ["T3 Chat", "t3", "https://t3.chat/new?q="],
+ ["Scira", "scira", "https://scira.ai/?q="],
+ ["Cursor", "cursor", "https://cursor.com/link/prompt?text="],
+];
+---
+<div class="doc-actions" data-markdown={markdown}>
+ <a href={`https://github.com/smeltery/showrunner/edit/main/${source}`} target="_blank" rel="noreferrer"><img src="/assets/github.svg" width="19" height="19" alt="" />Edit on GitHub</a>
+ <a href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 10 7-7 7 7M12 3v18" /></svg>Scroll to top</a>
+ <button type="button" class="copy-markdown" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h11v13H9zM5 16H3V3h12v2" /></svg><span>Copy as Markdown</span></button>
+ <p class="markdown-status sr-only" role="status"></p>
+ <textarea class="markdown-fallback" aria-label="Page Markdown" readonly hidden></textarea>
+ <details class="chat-actions" hidden>
+  <summary><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v13H9l-5 4z" /></svg>Open in chat<svg class="action-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4" /></svg></summary>
+  <div class="chat-providers">{providers.map(([name, icon, url]) => <a data-provider-url={url} href={url} target="_blank" rel="noreferrer"><img src={`/assets/chat/${icon}.svg`} width="19" height="19" alt="" /><span>{name}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 4H3v17h17v-7" /></svg></a>)}</div>
+  <p class="chat-note">Opens with this page’s documentation in the prompt.</p>
+ </details>
+</div>

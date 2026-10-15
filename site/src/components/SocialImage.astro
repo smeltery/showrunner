@@ -1,0 +1,12 @@
+---
+const image = Astro.site ? new URL("/assets/social.png", Astro.site).href : "/assets/social.png";
+const alt = "Showrunner — Make your pull request worth watching. Agent-directed demos with Playwright and GitHub. Made by Smeltery.";
+---
+<meta property="og:image" content={image} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={alt} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content={image} />
+<meta name="twitter:image:alt" content={alt} />

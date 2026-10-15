@@ -1,0 +1,9 @@
+---
+import { docPages, docGroups } from "../lib/docs";
+interface Props { active: string; }
+const { active } = Astro.props;
+---
+<nav aria-label="Documentation pages">
+	{docGroups.map((group) => <div class="docs-nav-group"><p>{group}</p>{docPages.filter((page) => page.group === group).map((page) => <a href={page.href} aria-current={page.id === active ? "page" : undefined}>{page.title}</a>)}</div>)}
+	<a class="docs-back" href="/">Back to Showrunner</a>
+</nav>

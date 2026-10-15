@@ -1,0 +1,6 @@
+---
+import { Code } from "astro:components";
+interface Props { code: string; lang: "bash" | "ts"; id?: string; }
+const { code, lang, id } = Astro.props;
+---
+<Code code={code} lang={lang} theme="github-light" tabindex="0" transformers={[{ code(node) { if (id) node.properties.id = id; } }]} />

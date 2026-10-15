@@ -1,0 +1,173 @@
+---
+import HighlightedCode from "./HighlightedCode.astro";
+const snippet0 = "npx skills add smeltery/showrunner --skill showrunner";
+const snippet1 = "git clone git@github.com:smeltery/showrunner.git\ncd showrunner\nflox activate\npnpm install\npnpm exec playwright install chromium\npnpm demo\npnpm exec playwright show-report";
+const snippet2 = "cd /path/to/showrunner\nflox activate\npnpm install\npnpm build\ncd /path/to/your/app\npnpm add -D @playwright/test /absolute/path/to/showrunner";
+const snippet3 = "import { defineConfig } from \"@playwright/test\";\n\nexport default defineConfig({\n  testDir: \"./demos\",\n  testMatch: \"**/*.demo.ts\",\n  use: {\n    baseURL: process.env.DEMO_BASE_URL ?? \"http://localhost:3000\",\n    viewport: { width: 1280, height: 720 },\n    video: \"on\",\n    trace: \"on\",\n  },\n});";
+const snippet4 = "pnpm exec playwright test --config=playwright.demo.config.ts";
+---
+
+			<p class="eyebrow">START HERE / GETTING STARTED</p>
+			<h1>Your first demo.<br /><em>Directed by your agent.</em></h1>
+			<p class="intro">
+				Give your agent the Showrunner skill. It handles the scenario, verification, and recording
+				using your application’s existing setup.
+			</p>
+			<section class="agent-setup" aria-labelledby="agent-skill">
+				<p class="eyebrow">START WITH YOUR AGENT</p>
+				<h2 id="agent-skill">One skill. The whole first take.</h2>
+				<p>
+					From your application repository, install the Showrunner skill and select
+					your agent. The skill lives alongside the library, so its workflow can evolve with the
+					API.
+				</p>
+				<div class="command">
+					<div class="command-header">
+						<span>INSTALL THE SKILL</span
+						><button class="copy-button" data-copy="skill-install" hidden>
+							Copy install command
+						</button>
+					</div>
+					<HighlightedCode code={snippet0} lang="bash" id="skill-install" />
+				</div>
+				<p class="copy-status" id="skill-install-status" role="status"></p>
+				<p class="setup-note">
+					The skill works with your coding agent. Install it in the application repository where you want to create the demo.
+				</p>
+				<h3>Then ask for the demo.</h3>
+				<div class="command">
+					<div class="command-header">
+						<span>YOUR AGENT</span
+						><button
+							class="copy-button"
+							data-copy="agent-prompt"
+							data-copy-success="Copied. Paste this prompt into your coding agent."
+							hidden
+						>
+							Copy prompt
+						</button>
+					</div>
+					<pre is:raw
+						class="prompt"
+						tabindex="0"
+					><code id="agent-prompt">Use the showrunner skill to demo this change. Reuse this app’s test setup, verify the outcome, record the walkthrough, and tell me what passed and where the recording is saved.</code></pre>
+				</div>
+				<p class="copy-status" id="agent-prompt-status" role="status"></p>
+				<p>
+					You get a reusable scenario, verification results, and the recording and trace when the
+					run succeeds. Missing access or app setup is reported explicitly.
+				</p>
+				<p>
+					<a href="/skill/SKILL.md">Read the skill instructions</a> ·
+					<a href="#first">Prefer to run it yourself?</a>
+				</p>
+			</section>
+			<aside class="notice">
+				<strong>A quick note on access</strong>
+				<p>
+					The skill does not install the runtime. Showrunner is a private package on GitHub
+					Packages, not the public npm registry. Package installation needs a GitHub token with
+					access to smeltery/showrunner. You can also build from a local checkout.
+				</p>
+			</aside>
+			<section aria-labelledby="first">
+				<p class="eyebrow">MANUAL SETUP</p>
+				<h2 id="first">01 / Run the bundled demo</h2>
+				<p>
+					You’ll need <a href="https://flox.dev/">Flox</a> and access to the repository. Flox
+					provides Node.js 22 and pnpm. After installation, the bundled scenario runs without a
+					server, account, or network.
+				</p>
+				<div class="command">
+					<div class="command-header">
+						<span>TERMINAL</span
+						><button class="copy-button" data-copy="quickstart" hidden>Copy commands</button>
+					</div>
+					<HighlightedCode code={snippet1} lang="bash" id="quickstart" />
+				</div>
+				<p class="copy-status" id="quickstart-status" role="status"></p>
+				<p>
+					The demo replaces a draft task, adds it to the release checklist, and asserts that the
+					list contains exactly that task. Playwright saves the video and trace in
+					<code>test-results/</code>.
+				</p>
+				<p>To watch the browser as it runs, use <code>pnpm demo -- --headed</code>.</p>
+			</section>
+			<section aria-labelledby="app">
+				<h2 id="app">02 / Bring it to your application</h2>
+				<p>
+					Install Showrunner alongside <code>@playwright/test</code>. Choose the installation method
+					that matches your access.
+				</p>
+				<h3>From a local build</h3>
+				<div class="command">
+					<HighlightedCode code={snippet2} lang="bash" />
+				</div>
+				<h3 style="margin-top: 24px">From GitHub Packages</h3>
+				<p>
+					Configure the <code>@smeltery</code> scope for GitHub Packages and authenticate with a
+					token that can read this package. Then run <code>pnpm add -D @smeltery/showrunner</code>.
+					Follow the
+					<a href="/docs/configuration/#install"
+						>full installation guide</a
+					>
+					for registry setup or release tarball installation.
+				</p>
+				<p>
+					Your application owns authentication, URLs, data setup, and page objects. Showrunner adds
+					the presentation fixture.
+				</p>
+			</section>
+			<section aria-labelledby="record">
+				<h2 id="record">03 / Enable recording</h2>
+				<p>
+					Create <code>playwright.demo.config.ts</code> in your application. Put your scenarios in
+					<code>demos/</code> with the <code>.demo.ts</code> suffix.
+				</p>
+				<div class="command">
+					<HighlightedCode code={snippet3} lang="ts" />
+				</div>
+				<p>
+					Adapt the <a href="/#example">example workflow</a> to real routes and accessible names.
+					Start your application, then run:
+				</p>
+				<div class="command">
+					<HighlightedCode code={snippet4} lang="bash" />
+				</div>
+				<p>
+					Use assertions to verify the outcome. A caption describes the action; it does not prove
+					the action succeeded.
+				</p>
+			</section>
+			<section aria-labelledby="handoff">
+				<h2 id="handoff">04 / Share the result</h2>
+				<p>
+					Commit the scenario with your change. Share its recording with your pull request using
+					your team’s review workflow. Keep generated media, tokens, and authentication state out of
+					Git.
+				</p>
+				<nav class="next-step-cards" aria-label="Continue with Showrunner">
+ <a href="/docs/pull-requests/" class="next-step-primary"><span class="resource-kicker">NEXT STEP</span><strong>Prepare your pull request</strong><span>Attach the recording and explain what the demo verifies.</span></a>
+ <a href="/docs/api/"><span class="resource-kicker">REFERENCE</span><strong>Refine the walkthrough</strong><span>Add captions, cursor movement, and deliberate pacing.</span></a>
+ <a href="/docs/configuration/"><span class="resource-kicker">SETUP</span><strong>Configure your app</strong><span>Connect fixtures, authentication, and recording options.</span></a>
+ </nav>
+ <p class="resource-license">Planning to use Showrunner in your project? <a href="/docs/license/">Review the license</a>.</p>
+			</section>
+			<section aria-labelledby="trouble">
+				<h2 id="trouble">If your first take hits a snag</h2>
+				<ul>
+					<li>
+						<strong>Package access denied?</strong> Verify the registry and token permissions, or
+						use a local build from a checkout you can access.
+					</li>
+					<li>
+						<strong>Browser missing?</strong> Run
+						<code>pnpm exec playwright install chromium</code>. An installed Chrome can also be
+						selected with <code>SHOWRUNNER_BROWSER_CHANNEL=chrome pnpm demo</code>.
+					</li>
+					<li>
+						<strong>Action timed out?</strong> Check the locator and the app’s state. Presentation
+						delays are pacing, never readiness checks.
+					</li>
+				</ul>
+			</section>

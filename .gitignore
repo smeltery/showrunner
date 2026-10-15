@@ -9,3 +9,10 @@ playwright-report/
 playwright/.auth/
 *.webm
 *.mp4
+
+.website-studio/
+
+.astro/
+
+.vercel/
+.vercel

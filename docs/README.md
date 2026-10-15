@@ -16,6 +16,7 @@ flowchart LR
 
 | Doc                                   | Read it when you want to                          |
 | ------------------------------------- | ------------------------------------------------- |
+| [Agent skill](agent-skill.md)         | Have your agent create, verify, and record a demo |
 | [Getting started](getting-started.md) | Run the bundled demo                              |
 | [Usage](usage.md)                     | Add Showrunner to an application                  |
 | [Presentation API](presentation.md)   | Choose cursor, typing, caption, and chapter calls |
@@ -25,3 +26,7 @@ flowchart LR
 | [CI](ci.md)                           | See the checks that gate a change                 |
 | [Releasing](releasing.md)             | See how a green `main` becomes a GitHub Release   |
 | [License](license.md)                 | Read the PolyForm Shield terms                    |
+
+## Website
+
+See [Website](website.md) for local build, preview, and publishing setup.

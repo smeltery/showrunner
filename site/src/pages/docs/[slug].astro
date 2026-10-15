@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from "astro:content";
+import Docs from "../../layouts/Docs.astro";
+import { docPages } from "../../lib/docs";
+export async function getStaticPaths() {
+ const entries = await getCollection("documentation");
+ return entries.map(entry => {
+  const page = docPages.find(page => page.id === entry.id)!;
+  return { params: { slug: page.href.split("/")[2] }, props: { entry, page } };
+ });
+}
+const { entry, page } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+<Docs title={page.title} description={page.description} active={page.id} headings={headings.filter(h => h.depth === 2)} source={`docs/${entry.id}.md`}>
+ <p class="eyebrow">{page.group.toUpperCase()} / DOCUMENTATION</p>
+ <h1>{page.title}</h1>
+ <p class="docs-lead">{page.description}</p>
+ <Content />
+</Docs>

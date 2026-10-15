@@ -1,0 +1,13 @@
+---
+import Docs from "../../layouts/Docs.astro";
+import GettingStarted from "../../components/GettingStarted.astro";
+const headings = [
+	{ slug: "agent-skill", text: "Install the agent skill" },
+	{ slug: "first", text: "Run the bundled demo" },
+	{ slug: "app", text: "Bring it to your app" },
+	{ slug: "record", text: "Enable recording" },
+	{ slug: "handoff", text: "Share the result" },
+	{ slug: "trouble", text: "Troubleshooting" },
+];
+---
+<Docs title="Getting started" description="Ask your agent for a verified, replayable demo, or configure your first Showrunner scenario." active="getting-started" headings={headings} source="site/src/components/GettingStarted.astro"><GettingStarted /></Docs>

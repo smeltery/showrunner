@@ -1,0 +1,141 @@
+@media (max-width: 900px) {
+	.scene {
+		gap: 24px;
+		padding-inline: 28px;
+		grid-template-columns: 0.8fr 2fr;
+	}
+	.scene-context > p {
+		font-size: 24px;
+	}
+	.workflow {
+		gap: 40px;
+	}
+	.code-layout {
+		grid-template-columns: 1fr;
+		gap: 30px;
+	}
+	.code-layout > div > p:not(.eyebrow) {
+		max-width: 560px;
+	}
+}
+@media (max-width: 600px) {
+	.wrap {
+		width: calc(100% - 40px);
+	}
+	.brand {
+		font-size: 21px;
+	}
+	.hero {
+		padding-top: 48px;
+		padding-bottom: 40px;
+	}
+	h1 {
+		letter-spacing: -2.5px;
+		font-size: clamp(38px, 10vw, 58px);
+	}
+	h1 em {
+		letter-spacing: -2px;
+	}
+	.intro {
+		font-size: 16px;
+	}
+	.desktop-break {
+		display: none;
+	}
+	.actions {
+		gap: 12px;
+		flex-direction: column;
+	}
+	.section-label {
+		align-items: start;
+		flex-direction: column;
+		gap: 5px;
+	}
+	.section-label > span {
+		font-size: 9px;
+	}
+	.stage-top {
+		padding: 14px;
+		font-size: 9px;
+		letter-spacing: 0;
+	}
+	.stage-format,
+	.scene-context {
+		display: none;
+	}
+	.scene {
+		display: block;
+		padding: 23px 14px 82px;
+	}
+	.app-content {
+		padding: 22px 16px;
+	}
+	.app-content h3 {
+		font-size: 19px;
+	}
+	.mock-field > div {
+		flex-wrap: wrap;
+	}
+	#demo-input {
+		flex-basis: 130px;
+	}
+	.caption {
+		bottom: 22px;
+		font-size: 11px;
+	}
+	.stage-bottom {
+		padding: 14px;
+		gap: 14px;
+		flex-wrap: wrap;
+	}
+	.sequence {
+		gap: 18px;
+		flex: 1;
+	}
+	.sequence > span > span {
+		display: none;
+	}
+	.next-step {
+		padding-inline: 11px;
+	}
+	.demo-footnote {
+		text-align: left;
+	}
+	.workflow {
+		grid-template-columns: 1fr;
+		gap: 28px;
+		padding-block: 64px;
+	}
+	.section-intro h2 br {
+		display: none;
+	}
+	.section-intro > p:last-child {
+		max-width: none;
+	}
+	.code-section {
+		padding-block: 48px;
+	}
+	.code-layout .eyebrow {
+		font-size: 9px;
+	}
+	pre {
+		font-size: 11px;
+		padding: 16px;
+	}
+	.closing {
+		padding-block: 64px;
+	}
+	.guide {
+		padding-block: 42px;
+	}
+	.resource-list {
+		grid-template-columns: 1fr;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+	}
+}

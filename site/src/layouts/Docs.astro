@@ -1,0 +1,55 @@
+---
+import SocialImage from "../components/SocialImage.astro";
+import { getCollection } from "astro:content";
+import DocActions from "../components/DocActions.astro";
+import DocsNavigation from "../components/DocsNavigation.astro";
+import DocsSearch from "../components/DocsSearch";
+import { docPages, type SearchEntry } from "../lib/docs";
+interface Props {
+	title: string;
+	description: string;
+	active: string;
+	headings: { slug: string; text: string; depth?: number }[];
+	source?: string;
+}
+const { title, description, active, headings, source = "docs/agent-skill.md" } = Astro.props;
+const collection = await getCollection("documentation");
+const entries: SearchEntry[] = docPages.map((page) => ({ ...page, text: collection.find((entry) => entry.id === page.id)?.body ?? "agent skill install quick start local setup recording troubleshooting" }));
+const current = docPages.findIndex((page) => page.id === active);
+const previous = docPages[current - 1];
+const next = docPages[current + 1];
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title} — Showrunner documentation</title>
+		<meta name="description" content={description} /><meta name="robots" content={process.env.VERCEL_ENV === "production" ? "index, follow" : "noindex, nofollow"} />
+{Astro.site && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />}
+		<meta name="theme-color" content="#f7f4ed" /><meta property="og:title" content={`${title} — Showrunner documentation`} /><meta property="og:description" content={description} /><SocialImage />
+		<link rel="icon" href="/assets/mark.svg" type="image/svg+xml" />
+		<link rel="stylesheet" href="/styles.css" /><link rel="stylesheet" href="/layout.css" /><link rel="stylesheet" href="/responsive.css" /><link rel="stylesheet" href="/navigation.css" /><link rel="stylesheet" href="/docs.css" /><link rel="stylesheet" href="/docs-search.css" /><link rel="stylesheet" href="/docs-actions.css" />
+		<script is:inline src="/navigation.js" defer></script><script is:inline src="/main.js" defer></script><script is:inline src="/docs.js" defer></script><script is:inline src="/docs-actions.js" defer></script>
+	</head>
+	<body id="top" class="docs-page">
+<noscript><style>@media (max-width: 900px) { .docs-page .docs-sidebar { display: block; } }</style></noscript>
+		<a class="skip" href="#main">Skip to content</a>
+		<header class="docs-header">
+			<a class="brand" href="/" aria-label="Showrunner home"><img src="/assets/mark.svg" alt="" width="28" height="28" /><span>showrunner<span class="brand-period">.</span></span></a><span class="docs-label">Documentation</span>
+			<nav class="docs-header-links" aria-label="Documentation shortcuts"><a href="/docs/api/">API reference</a><a class="icon-link" href="https://github.com/smeltery/showrunner"><img src="/assets/github.svg" alt="" width="17" height="17" />GitHub</a></nav>
+			<DocsSearch entries={entries} client:load />
+			<a class="menu-fallback" href="#docs-navigation">Browse docs</a><button class="menu-toggle" aria-label="Open documentation navigation" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false" hidden><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
+		</header>
+		<div class="docs-layout">
+			<aside class="docs-sidebar" id="docs-navigation"><DocsNavigation active={active} /></aside>
+			<main id="main" class="docs-main">
+				<details class="docs-mobile-toc"><summary>On this page</summary><nav aria-label="Page sections">{headings.map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}</nav></details>
+				<article class="docs-article"><slot /></article>
+				<nav class="docs-pagination" aria-label="Previous and next pages">{previous ? <a href={previous.href}><small>Previous</small><span>{previous.title}</span></a> : <span />}{next && <a href={next.href}><small>Next</small><span>{next.title}</span></a>}</nav>
+				<footer class="docs-footer"><span>© 2026 Smeltery</span><a href="/docs/license/">PolyForm Shield license</a><a href="/">Showrunner home</a></footer>
+			</main>
+			<aside class="docs-toc"><p class="eyebrow">ON THIS PAGE</p><nav aria-label="On this page">{headings.map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}</nav><DocActions source={source} markdown={collection.find((entry) => entry.id === active)?.body} /></aside>
+		</div>
+		<dialog class="mobile-dialog docs-menu" id="mobile-menu" data-breakpoint="(max-width: 900px)" aria-labelledby="docs-menu-title"><div class="mobile-heading"><h2 id="docs-menu-title">Documentation</h2><button class="menu-close" aria-label="Close navigation" autofocus><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" /></svg></button></div><div class="mobile-body"><DocsNavigation active={active} /></div><div class="mobile-footer"><a class="icon-link" href="https://github.com/smeltery/showrunner"><img src="/assets/github.svg" alt="" width="20" height="20" />GitHub</a><a href="/">Showrunner home</a></div></dialog>
+	</body>
+</html>

@@ -1,0 +1,379 @@
+:root {
+	--paper: #f7f4ed;
+	--ink: #24241f;
+	--muted: #66665c;
+	--line: #d9d6cc;
+	--accent: #b83b17;
+	--stage: #242824;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	color: var(--ink);
+	background: var(--paper);
+	font-synthesis: none;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	font-size: 16px;
+	line-height: 1.6;
+}
+a {
+	color: inherit;
+	text-underline-offset: 4px;
+}
+button {
+	font: inherit;
+	cursor: pointer;
+}
+a,
+button {
+	-webkit-tap-highlight-color: transparent;
+}
+:focus-visible {
+	outline: 3px solid var(--accent);
+	outline-offset: 5px;
+}
+[hidden] {
+	display: none !important;
+}
+.wrap {
+	width: min(1200px, calc(100% - 64px));
+	margin-inline: auto;
+}
+
+.brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 24px;
+	font-weight: 750;
+	letter-spacing: -1px;
+	text-decoration: none;
+}
+.brand-period {
+	color: var(--accent);
+}
+
+.text-link:hover,
+.footer a:hover {
+	color: var(--accent);
+}
+
+.hero {
+	text-align: center;
+	padding-top: 78px;
+	padding-bottom: 58px;
+}
+.eyebrow {
+	font:
+		11px/1.6 ui-monospace,
+		SFMono-Regular,
+		monospace;
+	letter-spacing: 1.8px;
+	font-weight: 600;
+}
+.hero .eyebrow {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 9px;
+}
+.signal {
+	width: 7px;
+	height: 7px;
+	background: var(--accent);
+	border-radius: 50%;
+}
+h1,
+h2,
+h3,
+p {
+	margin-top: 0;
+}
+h1 {
+	font-size: clamp(44px, 6.6vw, 86px);
+	line-height: 1.04;
+	letter-spacing: -5px;
+	font-weight: 650;
+	margin-block: 22px 25px;
+}
+h1 em {
+	color: var(--accent);
+	font-family: Georgia, serif;
+	font-weight: 400;
+	letter-spacing: -4px;
+}
+.intro {
+	font-size: 18px;
+	color: var(--muted);
+	line-height: 1.7;
+	margin-bottom: 28px;
+}
+.actions {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 28px;
+	flex-wrap: wrap;
+}
+.button {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: 25px;
+	padding: 13px 21px;
+	min-height: 48px;
+	border-radius: 5px;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 600;
+}
+.primary {
+	color: white;
+	background: var(--accent);
+}
+.primary:hover {
+	background: #922d12;
+}
+.text-link {
+	font-size: 14px;
+	text-decoration: none;
+	padding: 12px 0;
+}
+.hero-note {
+	font:
+		11px/1.7 ui-monospace,
+		monospace;
+	color: var(--muted);
+	margin: 20px 0 0;
+}
+.section-label {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+	margin-bottom: 14px;
+}
+.section-label h2 {
+	letter-spacing: 0;
+	font-size: 14px;
+	font-weight: 500;
+	margin: 0;
+}
+.section-label > span {
+	font:
+		10px/1.5 ui-monospace,
+		monospace;
+	color: var(--muted);
+	letter-spacing: 1px;
+}
+.stage {
+	background: var(--stage);
+	color: #f7f4ed;
+	border-radius: 9px;
+	overflow: clip;
+	box-shadow: 0 20px 36px -28px #1b1b1b88;
+}
+.stage-top {
+	display: flex;
+	justify-content: space-between;
+	gap: 16px;
+	align-items: center;
+	padding: 17px 25px;
+	border-bottom: 1px solid #484b44;
+	font:
+		10px/1.5 ui-monospace,
+		monospace;
+	color: #c2c4b9;
+	letter-spacing: 1px;
+}
+.record-dot {
+	display: inline-block;
+	background: #ed7956;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	margin-right: 7px;
+}
+.scene {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	align-items: center;
+	gap: 48px;
+	padding: 42px 56px 76px;
+	background-image: radial-gradient(#ffffff12 1px, transparent 1px);
+	background-size: 18px 18px;
+}
+.scene-context .eyebrow {
+	color: #babdb2;
+}
+.scene-context > p {
+	font:
+		30px/1.25 Georgia,
+		serif;
+	margin: 18px 0 26px;
+}
+.take-label {
+	font:
+		10px ui-monospace,
+		monospace;
+	letter-spacing: 2px;
+	border: 1px solid #62665a;
+	padding: 7px 10px;
+	color: #c2c4b9;
+}
+.app-window {
+	background: #fbfaf6;
+	color: var(--ink);
+	border-radius: 7px;
+	box-shadow: 0 12px 32px #0003;
+	min-width: 0;
+}
+.window-bar {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 18px;
+	border-bottom: 1px solid #e3e0d7;
+	font:
+		10px ui-monospace,
+		monospace;
+	color: var(--muted);
+}
+.window-bar > :first-child {
+	color: #89897f;
+	letter-spacing: 3px;
+}
+.app-content {
+	padding: 24px 28px 26px;
+}
+.app-label {
+	font:
+		9px ui-monospace,
+		monospace;
+	letter-spacing: 1px;
+	color: var(--muted);
+	margin-bottom: 14px;
+}
+.app-content h3 {
+	font-size: 23px;
+	letter-spacing: -0.7px;
+	margin-bottom: 3px;
+}
+.app-content > p:not(.app-label) {
+	color: var(--muted);
+	font-size: 12px;
+}
+.mock-field > span {
+	font-size: 11px;
+	display: block;
+	margin-bottom: 6px;
+}
+.mock-field > div {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+#demo-input {
+	flex: 1;
+	min-width: 0;
+	border: 1px solid #c6c6bb;
+	background: white;
+	padding: 9px 11px;
+	border-radius: 4px;
+	font-size: 12px;
+}
+.mock-add {
+	background: #343d31;
+	color: white;
+	border-radius: 4px;
+	padding: 10px 12px;
+	font-size: 11px;
+	white-space: nowrap;
+}
+.checklist-item {
+	border-top: 1px solid #e3e0d7;
+	padding-top: 14px;
+	margin-top: 18px;
+	font-size: 12px;
+	color: var(--muted);
+}
+.empty-mark {
+	margin-right: 7px;
+}
+.caption {
+	position: absolute;
+	bottom: 23px;
+	left: 50%;
+	transform: translateX(-50%);
+	max-width: calc(100% - 32px);
+	padding: 7px 15px;
+	background: #111510;
+	color: #f2f1e8;
+	border-radius: 4px;
+	font-size: 12px;
+	text-align: center;
+	width: max-content;
+}
+.stage-bottom {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	padding: 18px 24px;
+	border-top: 1px solid #484b44;
+}
+.sequence {
+	display: flex;
+	gap: 25px;
+	font:
+		10px/1.6 ui-monospace,
+		monospace;
+	color: #b5b9ad;
+}
+.sequence > span {
+	border-top: 2px solid #555b4e;
+	padding-top: 9px;
+}
+.sequence .active {
+	border-color: #ef9471;
+	color: #ffc3a6;
+}
+.next-step {
+	color: #f7f4ed;
+	background: #3b4237;
+	border: 1px solid #626a5b;
+	border-radius: 4px;
+	min-height: 44px;
+	padding: 9px 17px;
+	font-size: 12px;
+	white-space: nowrap;
+}
+.next-step:hover {
+	background: #4c5547;
+}
+.demo-footnote {
+	font-size: 11px;
+	color: var(--muted);
+	margin-top: 17px;
+	text-align: center;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 108px;
+}
+.brand-icon {
+	display: inline-block;
+	flex-shrink: 0;
+	vertical-align: middle;
+}
+.hero-note {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.hero-note {
+	justify-content: center;
+}

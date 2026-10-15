@@ -1,0 +1,42 @@
+---
+interface Props { active?: "home" | "start"; }
+const { active } = Astro.props;
+---
+<header class="site-header">
+	<div class="wrap header-inner">
+		<a class="brand" href="/" aria-label="Showrunner home"
+			><img src="/assets/mark.svg" alt="" width="30" height="30" /><span
+				>showrunner<span class="brand-period">.</span></span
+			></a
+		>
+		<nav class="desktop-nav" aria-label="Main navigation">
+			<a href="/" aria-current={active === "home" ? "page" : undefined}>Overview</a>
+			<a href="/#workflow">How it works</a>
+			<a href="/docs/getting-started/" aria-current={active === "start" ? "page" : undefined}>Get started</a>
+		</nav>
+		<a class="github-link" href="https://github.com/smeltery/showrunner"
+			><img class="brand-icon" src="/assets/github.svg" alt="" width="18" height="18" />GitHub</a
+		>
+		<a class="menu-fallback" href="#footer-navigation">Menu</a>
+		<button
+			class="menu-toggle"
+			type="button"
+			aria-haspopup="dialog"
+			aria-controls="mobile-menu"
+			aria-expanded="false"
+			hidden
+		>
+			Menu
+			<svg
+				class="nav-icon"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.6"
+				aria-hidden="true"
+			>
+				<path d="M4 7h16M4 12h16M4 17h16" />
+			</svg>
+		</button>
+	</div>
+</header>
