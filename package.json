@@ -42,7 +42,7 @@
 		"site:dev": "pnpm --dir site dev"
 	},
 	"devDependencies": {
-		"@playwright/test": "1.63.0",
+		"@playwright/test": "1.64.0",
 		"@types/node": "^26.6.1",
 		"oxfmt": "0.69.0",
 		"typescript": "7.0.2"
