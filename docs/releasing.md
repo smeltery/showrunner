@@ -21,7 +21,7 @@ flowchart TD
 4. Otherwise it increments the latest patch tag, starting at `v0.1.0` when no release tag exists, pushes the tag, and runs `release.yml` with that tag.
 5. [`.github/workflows/release.yml`](../.github/workflows/release.yml) checks that the tag points at `origin/main`, runs the Flox checks, sets the packed package version from the tag, publishes `@smeltery/showrunner` to GitHub Packages, and uploads `showrunner-<version>.tgz` plus `SHA256SUMS`.
 
-`package.json` in Git stays the baseline. The published version comes from the tag. The package is private on GitHub Packages and is not published to the public npm registry. A version that is already on the registry is left as-is.
+`package.json` in Git stays the baseline. The published version comes from the tag. The package is public on GitHub Packages, not npmjs.com. Registry visibility is configured separately from repository visibility. Public GitHub Releases also include a tarball that can be downloaded without registry authentication. A version that is already on the registry is left as-is.
 
 A tag you push yourself also starts `release.yml`. A tag pushed by `GITHUB_TOKEN` does not, which is why auto-release dispatches the workflow after it pushes.
 

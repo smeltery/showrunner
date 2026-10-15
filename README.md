@@ -18,7 +18,7 @@
 
 Showrunner is a website-agnostic Playwright library for replayable pull request demos. A scenario keeps the visible cursor, paced typing, captions, and chapter cards. The application under test keeps authentication, URLs, data setup, and page objects. Playwright records the video.
 
-`@smeltery/showrunner` is a private package on GitHub Packages. It is not on the public npm registry. Install it with a GitHub token that can read packages from `smeltery/showrunner`, or from a local build.
+Showrunner’s source and [release downloads](https://github.com/smeltery/showrunner/releases) are public. Install from a release tarball or local build without registry authentication. `@smeltery/showrunner` is also public on GitHub Packages, where npm installation requires a GitHub token with package read access. It is not published to npmjs.com.
 
 ## Let your agent run the demo
 
@@ -37,7 +37,7 @@ The agent handles the scenario, verification, and recording using your applicati
 Requires [Flox](https://flox.dev/).
 
 ```sh
-git clone git@github.com:smeltery/showrunner.git
+git clone https://github.com/smeltery/showrunner.git
 cd showrunner
 flox activate
 pnpm install

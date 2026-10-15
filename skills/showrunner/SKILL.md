@@ -17,7 +17,7 @@ Keep routes, authentication, test accounts, data setup, cleanup, and scenarios i
 
 Check the installed Showrunner version and its documentation before choosing APIs. Prefer `node_modules/@smeltery/showrunner/docs/` or the supplied checkout's `docs/`; the [upstream usage guide](https://github.com/smeltery/showrunner/blob/main/docs/usage.md) covers installation and fixture composition.
 
-`@smeltery/showrunner` is private on GitHub Packages, not public npm. Reuse an authenticated registry configuration or a local build that the user can access. Never print tokens or commit registry credentials. Installing this skill does not install the library, browsers, or application dependencies.
+Showrunner’s source and release tarballs are public. Prefer a public release tarball or local build when registry credentials are unavailable. `@smeltery/showrunner` is public on GitHub Packages, not npmjs.com; npm installs from GitHub Packages require authentication and package read access. Reuse an existing authenticated registry configuration when available. Never print tokens or commit registry credentials. Installing this skill does not install the library, browsers, or application dependencies.
 
 Use the consumer's package manager and supported Playwright peer version. In the Showrunner checkout, develop inside `flox activate`. Start the application with its established command or reuse its Playwright `webServer`. Check readiness with an actual page or endpoint, not a presentation delay.
 

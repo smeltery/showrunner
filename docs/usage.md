@@ -12,7 +12,9 @@ flowchart LR
 
 ## Install
 
-From GitHub Packages:
+The source and [release downloads](https://github.com/smeltery/showrunner/releases) are public. Release tarballs and local builds do not require registry authentication.
+
+From GitHub Packages (requires an authenticated token with `read:packages` and access to the package, even when package visibility is public):
 
 ```sh
 npm config set @smeltery:registry https://npm.pkg.github.com
@@ -30,12 +32,13 @@ cd /path/to/your/app
 pnpm add -D @playwright/test /absolute/path/to/showrunner
 ```
 
-From a GitHub Release tarball:
+From a public GitHub Release tarball (example pinned to `v0.1.5`; choose the version you want from the release page):
 
 ```sh
-gh release download -R smeltery/showrunner -p 'showrunner-*.tgz' -p SHA256SUMS
+curl -fLO https://github.com/smeltery/showrunner/releases/download/v0.1.5/showrunner-0.1.5.tgz
+curl -fLO https://github.com/smeltery/showrunner/releases/download/v0.1.5/SHA256SUMS
 shasum -a 256 -c SHA256SUMS
-pnpm add -D @playwright/test ./showrunner-*.tgz
+pnpm add -D @playwright/test ./showrunner-0.1.5.tgz
 ```
 
 `@playwright/test` 1.63.0 or newer is a peer dependency. Showrunner does not start your application, seed data, or sign in.
